@@ -5,7 +5,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/mvanduijker/laravel-mercure-broadcaster.svg?style=flat-square)](https://packagist.org/packages/mvanduijker/laravel-mercure-broadcaster)
 
 
-Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing Server Sent Events with a breeze.
+Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing Server Sent Events in a breeze.
 
 ## Installation
 
