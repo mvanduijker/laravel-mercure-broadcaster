@@ -43,7 +43,7 @@ class BroadcasterTest extends TestCase
     /** @before */
     public function startMercureServer()
     {
-        $command = "docker run -d -e JWT_KEY='aVerySecretKey' -e DEMO=1 -e ALLOW_ANONYMOUS=1 -e PUBLISH_ALLOWED_ORIGINS='http://localhost' -p 3000:80 dunglas/mercure:v0.7";
+        $command = "docker run -d -e JWT_KEY='aVerySecretKey' -e DEMO=1 -e ALLOW_ANONYMOUS=1 -e PUBLISH_ALLOWED_ORIGINS='http://localhost' -p 3000:80 dunglas/mercure";
 
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()

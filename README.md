@@ -27,7 +27,7 @@ return [
 
         'mercure' => [
             'driver' => 'mercure',
-            'url' => env('MERCURE_URL', 'http://localhost:3000/hub'),
+            'url' => env('MERCURE_URL', 'http://localhost:3000/.well-known/mercure'),
             'secret' => env('MERCURE_SECRET', 'aVerySecretKey'),
         ],
 
@@ -70,7 +70,7 @@ class NewsItemCreated implements ShouldBroadcast
 In your frontend do something like:
 
 ```javascript
-var es = new EventSource('http://localhost:3000/hub?topic=' + encodeURIComponent('http://example/news-items'));
+var es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://example/news-items'));
 es.addEventListener('message', (messageEvent) => {
     var eventData = JSON.parse(messageEvent.data);
     console.log(eventData);
@@ -129,7 +129,7 @@ class MercureBroadcasterAuthorizationCookie
             'mercureAuthorization',
             (string) $token,
             15,
-            '/hub', // or which path you have mercure running
+            '/.well-known/mercure', // or which path you have mercure running
             parse_url(config('app.url'), PHP_URL_HOST),
             $secure,
             true
@@ -173,7 +173,7 @@ class DirectMessageCreated implements ShouldBroadcast
 Example Frontend:
 
 ```javascript
-var es = new EventSource('http://localhost:3000/hub?topic=' + encodeURIComponent('http://example/user/1/direct-messages'), { withCredentials: true });
+var es = new EventSource('http://localhost:3000/.well-known/mercure?topic=' + encodeURIComponent('http://example/user/1/direct-messages'), { withCredentials: true });
 es.addEventListener('message', (messageEvent) => {
     var eventData = JSON.parse(messageEvent.data);
     console.log(eventData);

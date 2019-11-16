@@ -10,7 +10,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('broadcasting.default', 'mercure');
         $app['config']->set('broadcasting.connections.mercure.driver', 'mercure');
-        $app['config']->set('broadcasting.connections.mercure.url', 'http://localhost:3000/hub');
+        $app['config']->set('broadcasting.connections.mercure.url', 'http://localhost:3000/.well-known/mercure');
         $app['config']->set('broadcasting.connections.mercure.secret', 'aVerySecretKey');
     }
 
