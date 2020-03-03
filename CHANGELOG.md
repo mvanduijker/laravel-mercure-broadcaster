@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 2.1.0 - 2020-03-03
+
+- support for laravel 7.0
+- dropped support php 7.1
+- added support php 7.4
+- dropped support for laravel 5.6 and 5.7
+
 ## 2.0.0 - 2019-11-16
 
 Compatible with Mercure 0.8 see https://github.com/dunglas/mercure/blob/master/docs/UPGRADE.md for upgrade instructions.
