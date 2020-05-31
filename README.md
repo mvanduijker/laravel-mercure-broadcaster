@@ -12,7 +12,7 @@ Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing 
 Make sure you have installed [Mercure](https://github.com/dunglas/mercure) and have it running. Check their docs how to 
 do it. (It's pretty easy)
 
-Configure laravel to use the mercure broadcaster by editing `config/broadcasting.php` for example:
+Configure laravel to use the Mercure broadcaster by editing `config/broadcasting.php` for example:
 
 ```php
 <?php
@@ -78,10 +78,10 @@ es.addEventListener('message', (messageEvent) => {
 ```
 
 
-Private channels go a bit differently then with broadcasting through sockets. Private channels are baked in Mercure and
+Private channels go a bit differently than with broadcasting through sockets. Private channels are baked in Mercure and
 are secured with a jwt token.
 
-First create a http middleware so we can generate the mercure authentication cookie with the token. 
+First create a http middleware, so we can generate the Mercure authentication cookie with the token. 
 Don't forget to add the middleware to your route!
 
 Example:
@@ -114,9 +114,10 @@ class MercureBroadcasterAuthorizationCookie
 
     private function createCookie($user, bool $secure)
     {
-        // Add audience(s) this user has access to
+        // Add topic(s) this user has access to
+        // This can also be URI Templates (to match several topics), or * (to match all topics)
         $subscriptions = [
-            "http://example/user/{$user->id}"
+            "http://example/user/{$user->id}/direct-messages",
         ];
 
         $token = (new Builder())
@@ -164,7 +165,7 @@ class DirectMessageCreated implements ShouldBroadcast
     {
         return new Channel(
             "http://example/user/{$this->directMessage->user_id}/direct-messages", 
-            ["http://example/user/{$this->directMessage->user_id}"]
+            true
         );
     }
 }

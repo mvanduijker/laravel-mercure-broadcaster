@@ -60,7 +60,7 @@ class MercureBroadcaster extends Broadcaster
         ]);
 
         foreach ($channels as $channel) {
-            $this->mercure->__invoke(new Update($channel->name, $payload, $channel->targets ?? []));
+            $this->mercure->__invoke(new Update($channel->name, $payload, $channel->private));
         }
     }
 }
