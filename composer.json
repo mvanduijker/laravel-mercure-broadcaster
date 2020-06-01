@@ -23,7 +23,7 @@
         "php": "^7.2",
         "illuminate/broadcasting": "~5.8|~6.0|~7.0",
         "lcobucci/jwt": "~3.2",
-        "symfony/mercure": "~0.3"
+        "symfony/mercure": "~0.4"
     },
     "require-dev": {
         "larapack/dd": "^1.0",

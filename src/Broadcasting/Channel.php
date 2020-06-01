@@ -10,14 +10,14 @@ class Channel
     public $name;
 
     /**
-     * @var array
+     * @var bool
      */
-    public $targets;
+    public $private;
 
-    public function __construct(string $name, array $targets = [])
+    public function __construct(string $name, bool $private = false)
     {
         $this->name = $name;
-        $this->targets = $targets;
+        $this->private = $private;
     }
 
     public function __toString()

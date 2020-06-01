@@ -18,7 +18,7 @@ class ExampleEvent implements ShouldBroadcastNow
     {
         return new Channel(
             "http://example/event",
-            ["http://example/everyone"]
+            true
         );
     }
 }
