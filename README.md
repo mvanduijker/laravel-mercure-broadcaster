@@ -209,6 +209,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
 - [Mark van Duijker](https://github.com/mvanduijker)
+- [Kévin Dunglas](https://github.com/dunglas)
 - [All Contributors](../../contributors)
 
 ## License
