@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.0.0 - 2020-06-01
+
+- support for Mercure 0.10, check https://mercure.rocks/docs/UPGRADE for more information
+
 ## 2.1.0 - 2020-03-03
 
 - support for laravel 7.0
