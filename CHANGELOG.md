@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.1.0 - 2020-09-08
+
+- support for Laravel 8
+- dropped support php 7.2
+- dropped support Laravel 5.x
+
 ## 3.0.0 - 2020-06-01
 
 - support for Mercure 0.10, check https://mercure.rocks/docs/UPGRADE for more information
