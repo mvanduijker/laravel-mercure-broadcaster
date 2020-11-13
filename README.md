@@ -1,7 +1,7 @@
 # Laravel Mercure Broadcaster
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mvanduijker/laravel-mercure-broadcaster.svg?style=flat-square)](https://packagist.org/packages/mvanduijker/laravel-mercure-broadcaster)
-[![Build Status](https://img.shields.io/travis/mvanduijker/laravel-mercure-broadcaster/master.svg?style=flat-square)](https://travis-ci.org/mvanduijker/laravel-mercure-broadcaster)
+![Build status](https://github.com/mvanduijker/laravel-mercure-broadcaster/workflows/Run%20tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/mvanduijker/laravel-mercure-broadcaster.svg?style=flat-square)](https://packagist.org/packages/mvanduijker/laravel-mercure-broadcaster)
 
 
