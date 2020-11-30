@@ -7,6 +7,7 @@ use Illuminate\Broadcasting\BroadcastManager;
 use Illuminate\Support\ServiceProvider;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key;
 use Symfony\Component\Mercure\Publisher;
 
 class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
@@ -21,9 +22,8 @@ class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
                         $config['url'],
                         function () use ($config) {
                             $token = (new Builder())
-                                ->set('mercure', ['publish' => ['*']])
-                                ->sign(new Sha256(), $config['secret'])
-                                ->getToken();
+                                ->withClaim('mercure', ['publish' => ['*']])
+                                ->getToken(new Sha256(), new Key($config['secret']));
 
                             return (string) $token;
                         }
