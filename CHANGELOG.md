@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.1.1 - 2020-12-01
+
+- fix errors with lcobucci/jwt version 3.4.*
+
 ## 3.1.0 - 2020-09-08
 
 - support for Laravel 8
