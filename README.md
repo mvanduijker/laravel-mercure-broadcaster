@@ -95,8 +95,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
-use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Key\InMemory;
 
 class MercureBroadcasterAuthorizationCookie
 {
@@ -120,15 +121,19 @@ class MercureBroadcasterAuthorizationCookie
             "http://example/user/{$user->id}/direct-messages",
         ];
 
-        $token = (new Builder())
-            ->setExpiration(time() + (60 * 15))
-            ->set('mercure', ['subscribe' => $subscriptions])
-            ->sign(new Sha256(), config('broadcasting.connections.mercure.secret'))
-            ->getToken();
+        $jwtConfiguration = Configuration::forSymmetricSigner(
+            new Sha256(),
+            InMemory::plainText(config('broadcasting.connections.mercure.secret'))
+        );
+
+        $token = $jwtConfiguration->builder()
+            ->withClaim('mercure', ['subscribe' => $subscriptions])
+            ->getToken($jwtConfiguration->signer(), $jwtConfiguration->signingKey())
+            ->toString();
 
         return Cookie::make(
             'mercureAuthorization',
-            (string) $token,
+            $token,
             15,
             '/.well-known/mercure', // or which path you have mercure running
             parse_url(config('app.url'), PHP_URL_HOST),
