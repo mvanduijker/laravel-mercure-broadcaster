@@ -32,7 +32,7 @@ class BroadcasterTest extends TestCase
                 };
 
                 return true;
-            }, 100);
+            }, 2000);
         } catch (\Exception $exception) {
             $result = false;
         }
