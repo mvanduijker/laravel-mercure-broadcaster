@@ -21,7 +21,7 @@ class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
                 return new MercureBroadcaster(
                     new Hub(
                         $config['url'],
-                        new StaticTokenProvider($app->make('mercure.broadcaster.publisher_jwt_token'))
+                        new StaticTokenProvider($app->make('mvanduijker.mercure_broadcaster.publisher_jwt'))
                     )
                 );
             });
@@ -29,7 +29,7 @@ class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton('mercure.broadcaster.publisher_jwt_token', function () {
+        $this->app->singleton('mvanduijker.mercure_broadcaster.publisher_jwt', function () {
             $jwtConfiguration = Configuration::forSymmetricSigner(
                 new Sha256(),
                 InMemory::plainText(config('broadcasting.connections.mercure.secret'))
