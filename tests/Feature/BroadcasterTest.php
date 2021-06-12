@@ -43,7 +43,7 @@ class BroadcasterTest extends TestCase
     /** @before */
     public function startMercureServer()
     {
-        $command = "docker run -d -p 3000:80 dunglas/mercure";
+        $command = "docker run -e SERVER_NAME=':80' -e MERCURE_PUBLISHER_JWT_KEY='!ChangeMe!' -e MERCURE_SUBSCRIBER_JWT_KEY='!ChangeMe!' -d -p 3000:80 dunglas/mercure";
 
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()
