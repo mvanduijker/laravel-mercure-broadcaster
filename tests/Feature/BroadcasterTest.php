@@ -32,7 +32,7 @@ class BroadcasterTest extends TestCase
                 };
 
                 return true;
-            }, 2000);
+            }, 100);
         } catch (\Exception $exception) {
             $result = false;
         }
@@ -48,6 +48,7 @@ class BroadcasterTest extends TestCase
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()
             ->getOutput();
+        sleep(1);
     }
 
     /** @after */
