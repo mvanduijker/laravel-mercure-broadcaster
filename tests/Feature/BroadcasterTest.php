@@ -48,6 +48,7 @@ class BroadcasterTest extends TestCase
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()
             ->getOutput();
+
         sleep(1);
     }
 

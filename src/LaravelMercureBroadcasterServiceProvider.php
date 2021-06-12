@@ -8,7 +8,8 @@ use Illuminate\Support\ServiceProvider;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key\InMemory;
-use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Hub;
+use Symfony\Component\Mercure\Jwt\StaticTokenProvider;
 
 class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
 {
@@ -17,20 +18,20 @@ class LaravelMercureBroadcasterServiceProvider extends ServiceProvider
         $this->app
             ->make(BroadcastManager::class)
             ->extend('mercure', function ($app, array $config) {
-                return new MercureBroadcaster(
-                    new Publisher(
-                        $config['url'],
-                        function () use ($config) {
-                            $jwtConfiguration = Configuration::forSymmetricSigner(
-                                new Sha256(),
-                                InMemory::plainText($config['secret'])
-                            );
+                $jwtConfiguration = Configuration::forSymmetricSigner(
+                    new Sha256(),
+                    InMemory::plainText($config['secret'])
+                );
 
-                            return $jwtConfiguration->builder()
-                                ->withClaim('mercure', ['publish' => ['*']])
-                                ->getToken($jwtConfiguration->signer(), $jwtConfiguration->signingKey())
-                                ->toString();
-                        }
+                $token = $jwtConfiguration->builder()
+                    ->withClaim('mercure', ['publish' => ['*']])
+                    ->getToken($jwtConfiguration->signer(), $jwtConfiguration->signingKey())
+                    ->toString();
+
+                return new MercureBroadcaster(
+                    new Hub(
+                        $config['url'],
+                        new StaticTokenProvider($token)
                     )
                 );
             });

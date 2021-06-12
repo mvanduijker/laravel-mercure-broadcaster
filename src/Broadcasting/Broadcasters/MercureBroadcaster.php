@@ -3,20 +3,16 @@
 namespace Duijker\LaravelMercureBroadcaster\Broadcasting\Broadcasters;
 
 use Illuminate\Broadcasting\Broadcasters\Broadcaster;
-use Illuminate\Support\Str;
-use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 
 class MercureBroadcaster extends Broadcaster
 {
-    /**
-     * @var Publisher
-     */
-    protected $mercure;
+    protected HubInterface $hub;
 
-    public function __construct(Publisher $mercure)
+    public function __construct(HubInterface $hub)
     {
-        $this->mercure = $mercure;
+        $this->hub = $hub;
     }
 
     /**
@@ -60,7 +56,7 @@ class MercureBroadcaster extends Broadcaster
         ]);
 
         foreach ($channels as $channel) {
-            $this->mercure->__invoke(new Update($channel->name, $payload, $channel->private));
+            $this->hub->publish(new Update($channel->name, $payload, $channel->private));
         }
     }
 }
