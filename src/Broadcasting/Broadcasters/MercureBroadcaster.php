@@ -2,11 +2,11 @@
 
 namespace Duijker\LaravelMercureBroadcaster\Broadcasting\Broadcasters;
 
-use Illuminate\Broadcasting\Broadcasters\Broadcaster;
+use Illuminate\Contracts\Broadcasting\Broadcaster;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Mercure\Update;
 
-class MercureBroadcaster extends Broadcaster
+class MercureBroadcaster implements Broadcaster
 {
     protected HubInterface $hub;
 
