@@ -186,6 +186,13 @@ es.addEventListener('message', (messageEvent) => {
 });
 ```
 
+### Advanced usage
+
+If you want to generate your own JWT, you can do it by overriding the `mvanduijker.mercure_broadcaster.publisher_jwt` service. 
+You want to do this if you want to have custom claims, using other signing algorithms, etc. It expects a string back containing the JWT.
+Example how the default JWT is generated: https://github.com/mvanduijker/laravel-mercure-broadcaster/blob/master/src/LaravelMercureBroadcasterServiceProvider.php#L32
+
+Make sure you also make the changes in the cookie middleware.
 
 ### Further reading
 
