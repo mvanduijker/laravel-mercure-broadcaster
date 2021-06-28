@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.3.0 - 2021-06-28
+
+- Fix using deprecated code from Mercure library
+- Prefer using Laravel Broadcaster contract over extending the base class
+- Add service that generates the JWT so we are able to override to use a custom implementation
+- Fix starting mercure server in tests
+
 ## 3.2.0 - 2020-12-01
 
 - add support for php 8
