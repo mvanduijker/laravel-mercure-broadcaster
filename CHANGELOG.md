@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.4.0 - 2022-02-09
+
+- Add support for Laravel 9
+
 ## 3.3.0 - 2021-06-28
 
 - Fix using deprecated code from Mercure library
