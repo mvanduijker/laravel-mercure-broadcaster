@@ -144,6 +144,8 @@ class MercureBroadcasterAuthorizationCookie
 }
 ```
 
+Because Laravel encrypts and decrypts cookies by default, don't forget to add an [exception](https://laravel.com/docs/9.x/responses#cookies-and-encryption) for the `mercureAuthorization` cookie in `App\Http\Middleware\EncryptCookies`.
+
 Example event:
 
 ```php
