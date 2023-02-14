@@ -10,13 +10,27 @@ class BroadcasterTest extends TestCase
 {
     private $mercureDockerContainerId;
 
-    public function test_it_broadcasts()
+    /**
+     * @dataProvider supportedMercureVersionsDataProvider
+     */
+    public function test_it_broadcasts($mercureVersion)
     {
+        $this->startMercureServer($mercureVersion);
         event(new ExampleEvent('example data'));
 
         $this->assertMercureDockerLog(function ($log) {
-            return strpos($log, '\"POST /.well-known/mercure HTTP/1.1\" 200 45"') > 0;
+            return strpos($log, '\"POST /.well-known/mercure HTTP/1.1\" 200 45"') > 0
+                || (strpos($log, '"uri": "/.well-known/mercure"') > 0 && strpos($log, '"status": 200') > 0);
         });
+    }
+
+    public function supportedMercureVersionsDataProvider()
+    {
+        yield ['v0.11'];
+        yield ['v0.12'];
+        yield ['v0.13'];
+        yield ['v0.14'];
+        yield ['latest'];
     }
 
     private function assertMercureDockerLog(callable $matcher)
@@ -28,22 +42,24 @@ class BroadcasterTest extends TestCase
                     ->getErrorOutput();
 
                 if (!$matcher($output)) {
-                    throw new \Exception;
+                    throw new \Exception($output);
                 };
 
                 return true;
             }, 100);
         } catch (\Exception $exception) {
             $result = false;
+            dump($exception->getMessage());
         }
+
 
         $this->assertTrue($result);
     }
 
-    /** @before */
-    public function startMercureServer()
+    /** before */
+    public function startMercureServer($version)
     {
-        $command = "docker run -e SERVER_NAME=':80' -e MERCURE_PUBLISHER_JWT_KEY='!ChangeMe!' -e MERCURE_SUBSCRIBER_JWT_KEY='!ChangeMe!' -d -p 3000:80 dunglas/mercure";
+        $command = "docker run -e SERVER_NAME=':80' -e MERCURE_PUBLISHER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -e MERCURE_SUBSCRIBER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -d -p 3000:80 dunglas/mercure:$version";
 
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()
