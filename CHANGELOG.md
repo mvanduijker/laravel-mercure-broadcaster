@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.5.0 - 2023-02-14
+
+- Add support for Laravel 10
+- Added PHP 8.2 in the pipeline
+- Fixed tests with latest mercure release (change of log format)
+
 ## 3.4.0 - 2022-02-09
 
 - Add support for Laravel 9
