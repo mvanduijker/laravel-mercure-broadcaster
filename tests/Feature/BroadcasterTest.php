@@ -20,7 +20,8 @@ class BroadcasterTest extends TestCase
 
         $this->assertMercureDockerLog(function ($log) {
             return strpos($log, '\"POST /.well-known/mercure HTTP/1.1\" 200 45"') > 0
-                || (strpos($log, '"uri": "/.well-known/mercure"') > 0 && strpos($log, '"status": 200') > 0);
+                || (strpos($log, '"uri": "/.well-known/mercure"') > 0 && strpos($log, '"status": 200') > 0)
+                || (strpos($log, '"uri":"/.well-known/mercure"') > 0 && strpos($log, '"status":200') > 0);
         });
     }
 
@@ -30,6 +31,7 @@ class BroadcasterTest extends TestCase
         yield ['v0.12'];
         yield ['v0.13'];
         yield ['v0.14'];
+        yield ['v0.15'];
         yield ['latest'];
     }
 
