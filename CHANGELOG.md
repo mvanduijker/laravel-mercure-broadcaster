@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.6.0 - 2023-03-13
+
+- Add support for Laravel 11
+- Added PHP 8.3 in the pipeline
+
 ## 3.5.0 - 2023-02-14
 
 - Add support for Laravel 10
