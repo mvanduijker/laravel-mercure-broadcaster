@@ -25,7 +25,7 @@ class BroadcasterTest extends TestCase
         });
     }
 
-    public function supportedMercureVersionsDataProvider()
+    public static function supportedMercureVersionsDataProvider()
     {
         yield ['v0.11'];
         yield ['v0.12'];
