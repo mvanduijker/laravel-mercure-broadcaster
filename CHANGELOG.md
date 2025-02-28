@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.7.0 - 2025-02-28
+
+- Add support for Laravel 12
+
 ## 3.6.1 - 2024-11-20
 
 - Add support for lcobucci/jwt v5
