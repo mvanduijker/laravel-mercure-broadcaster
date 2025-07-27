@@ -2,7 +2,9 @@
 
 namespace Duijker\LaravelMercureBroadcaster\Tests\Feature;
 
+use Duijker\LaravelMercureBroadcaster\Tests\Support\ExampleChannelEvent;
 use Duijker\LaravelMercureBroadcaster\Tests\Support\ExampleEvent;
+use Duijker\LaravelMercureBroadcaster\Tests\Support\ExamplePrivateChannelEvent;
 use Duijker\LaravelMercureBroadcaster\Tests\TestCase;
 use Symfony\Component\Process\Process;
 
@@ -13,10 +15,11 @@ class BroadcasterTest extends TestCase
     /**
      * @dataProvider supportedMercureVersionsDataProvider
      */
-    public function test_it_broadcasts($mercureVersion)
+    public function test_it_broadcasts($mercureVersion, $event)
     {
         $this->startMercureServer($mercureVersion);
-        event(new ExampleEvent('example data'));
+
+        event($event);
 
         $this->assertMercureDockerLog(function ($log) {
             return strpos($log, '\"POST /.well-known/mercure HTTP/1.1\" 200 45"') > 0
@@ -27,12 +30,18 @@ class BroadcasterTest extends TestCase
 
     public static function supportedMercureVersionsDataProvider()
     {
-        yield ['v0.11'];
-        yield ['v0.12'];
-        yield ['v0.13'];
-        yield ['v0.14'];
-        yield ['v0.15'];
-        yield ['latest'];
+        $event = new ExampleEvent('example data');
+        $channelEvent = new ExampleChannelEvent('example data laravel channel');
+        $privateChannelEvent = new ExamplePrivateChannelEvent('example data private laravel channel');
+
+        foreach ([$event, $channelEvent, $privateChannelEvent] as $exampleEvent) {
+            yield ['v0.11', $exampleEvent];
+            yield ['v0.12', $exampleEvent];
+            yield ['v0.13', $exampleEvent];
+            yield ['v0.14', $exampleEvent];
+            yield ['v0.15', $exampleEvent];
+            yield ['latest', $exampleEvent];
+        }
     }
 
     private function assertMercureDockerLog(callable $matcher)
