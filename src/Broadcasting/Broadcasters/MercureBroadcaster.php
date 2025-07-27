@@ -59,6 +59,7 @@ class MercureBroadcaster implements Broadcaster
 
         foreach ($channels as $channel) {
             if (!$channel instanceof Channel) {
+                // this will be deprecated
                 $this->hub->publish(new Update($channel->name, $payload, $channel->private));
                 continue;
             }
