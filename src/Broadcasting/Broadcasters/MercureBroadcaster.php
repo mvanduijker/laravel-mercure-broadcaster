@@ -2,6 +2,7 @@
 
 namespace Duijker\LaravelMercureBroadcaster\Broadcasting\Broadcasters;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\Broadcaster;
 use Symfony\Component\Mercure\HubInterface;
@@ -57,8 +58,12 @@ class MercureBroadcaster implements Broadcaster
         ]);
 
         foreach ($channels as $channel) {
-            $isPrivate = $channel instanceof PrivateChannel;
-            $this->hub->publish(new Update($channel->name, $payload, $isPrivate));
+            if (!$channel instanceof Channel) {
+                $this->hub->publish(new Update($channel->name, $payload, $channel->private));
+                continue;
+            }
+
+            $this->hub->publish(new Update($channel->__toString(), $payload, $channel instanceof PrivateChannel));
         }
     }
 }
