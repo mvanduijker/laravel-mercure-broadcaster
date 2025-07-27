@@ -2,6 +2,9 @@
 
 namespace Duijker\LaravelMercureBroadcaster\Broadcasting;
 
+/**
+ * @deprecated please use Illuminate\Broadcasting\Channel classes
+ */
 class Channel
 {
     /**
