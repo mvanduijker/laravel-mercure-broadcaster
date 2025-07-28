@@ -45,7 +45,7 @@ Add an event which implements ShouldBroadcast interface like in https://laravel.
 
 namespace App\Events;
 
-use Duijker\LaravelMercureBroadcaster\Broadcasting\Channel;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class NewsItemCreated implements ShouldBroadcast
@@ -153,7 +153,7 @@ Example event:
 
 namespace App\Events;
 
-use Duijker\LaravelMercureBroadcaster\Broadcasting\Channel;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class DirectMessageCreated implements ShouldBroadcast
@@ -170,9 +170,8 @@ class DirectMessageCreated implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new Channel(
+        return new PrivateChannel(
             "http://example/user/{$this->directMessage->user_id}/direct-messages", 
-            true
         );
     }
 }
