@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-mercure-broadcaster` will be documented in this file
 
+## 3.8.0 - 2025-08-23
+
+- GitHub workflow optimizations
+- Add support for native channel classes
+- Deprecate custom Channel class in favor of native channel classes
+
 ## 3.7.0 - 2025-02-28
 
 - Add support for Laravel 12
