@@ -12,7 +12,7 @@ Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing 
 Make sure you have installed [Mercure](https://github.com/dunglas/mercure) and have it running. Check their docs how to 
 do it. (It's pretty easy)
 
-Install the Package via Composer: 
+Install the package via Composer: 
 ```
 composer require mvanduijker/laravel-mercure-broadcaster
 ```
