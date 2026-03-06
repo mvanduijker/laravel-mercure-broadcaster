@@ -6,6 +6,8 @@ use Duijker\LaravelMercureBroadcaster\Tests\Support\ExampleChannelEvent;
 use Duijker\LaravelMercureBroadcaster\Tests\Support\ExampleEvent;
 use Duijker\LaravelMercureBroadcaster\Tests\Support\ExamplePrivateChannelEvent;
 use Duijker\LaravelMercureBroadcaster\Tests\TestCase;
+use PHPUnit\Framework\Attributes\After;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\Process\Process;
 
 class BroadcasterTest extends TestCase
@@ -15,6 +17,7 @@ class BroadcasterTest extends TestCase
     /**
      * @dataProvider supportedMercureVersionsDataProvider
      */
+    #[DataProvider('supportedMercureVersionsDataProvider')]
     public function test_it_broadcasts($mercureVersion, $event)
     {
         $this->startMercureServer($mercureVersion);
@@ -80,6 +83,7 @@ class BroadcasterTest extends TestCase
     }
 
     /** @after */
+    #[After]
     public function stopMercureServer(): void
     {
         Process::fromShellCommandline("docker kill {$this->mercureDockerContainerId}")
