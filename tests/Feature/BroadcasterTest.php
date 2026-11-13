@@ -73,7 +73,12 @@ class BroadcasterTest extends TestCase
     /** before */
     public function startMercureServer($version)
     {
-        $command = "docker run -e SERVER_NAME=':80' -e MERCURE_PUBLISHER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -e MERCURE_SUBSCRIBER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -d -p 3000:80 dunglas/mercure:$version";
+        // Mercure 1.x rejects 0.x tokens (bespoke `mercure` claim) unless compatibility mode is on,
+        // and no longer enables access logs by default
+        $compat = $version === 'latest'
+            ? "-e MERCURE_EXTRA_DIRECTIVES='protocol_version_compatibility 8' -e CADDY_SERVER_EXTRA_DIRECTIVES='log'"
+            : '';
+        $command = "docker run $compat -e SERVER_NAME=':80' -e MERCURE_PUBLISHER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -e MERCURE_SUBSCRIBER_JWT_KEY='bfaf06ec-ac9d-11ed-a49f-6bc3bc0854c9' -d -p 3000:80 dunglas/mercure:$version";
 
         $this->mercureDockerContainerId = Process::fromShellCommandline($command)
             ->mustRun()
