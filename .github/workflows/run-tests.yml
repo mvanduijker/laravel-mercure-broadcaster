@@ -100,6 +100,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # EOL Laravel versions all have security advisories; Composer 2.11+ refuses to install them by default
+          composer config policy.advisories.block false
           composer require "illuminate/broadcasting:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
