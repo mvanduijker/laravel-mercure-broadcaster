@@ -15,6 +15,18 @@ Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing 
 Make sure you have installed [Mercure](https://github.com/dunglas/mercure) and have it running. Check their docs how to
 do it. (It's pretty easy)
 
+> [!WARNING]
+> This package uses the Mercure 0.x protocol (the `mercure` JWT claim, `topic` query parameter and `mercureAuthorization` cookie).
+> Mercure 1.x hubs reject this by default. To use this package with a Mercure 1.x hub, enable
+> [compatibility mode](https://mercure.rocks/docs/UPGRADE#compatibility-mode), for example with the official Docker image:
+>
+> ```
+> MERCURE_EXTRA_DIRECTIVES='protocol_version_compatibility 8'
+> ```
+>
+> If you want to run Mercure 1.x without compatibility mode, use the
+> [built-in Laravel Mercure broadcaster](https://laravel.com/framework/docs/broadcasting#mercure) instead.
+
 Install the package via Composer:
 
 ```
