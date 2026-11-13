@@ -4,15 +4,19 @@
 ![Build status](https://github.com/mvanduijker/laravel-mercure-broadcaster/workflows/Run%20tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/mvanduijker/laravel-mercure-broadcaster.svg?style=flat-square)](https://packagist.org/packages/mvanduijker/laravel-mercure-broadcaster)
 
-
 Laravel broadcaster for [Mercure](https://github.com/dunglas/mercure) for doing Server Sent Events in a breeze.
+
+> [!IMPORTANT]
+> Laravel now supports Mercure natively. For new projects, use the
+> [built-in Mercure broadcaster](https://laravel.com/framework/docs/broadcasting#mercure) instead.
 
 ## Installation
 
-Make sure you have installed [Mercure](https://github.com/dunglas/mercure) and have it running. Check their docs how to 
+Make sure you have installed [Mercure](https://github.com/dunglas/mercure) and have it running. Check their docs how to
 do it. (It's pretty easy)
 
-Install the package via Composer: 
+Install the package via Composer:
+
 ```
 composer require mvanduijker/laravel-mercure-broadcaster
 ```
@@ -43,7 +47,7 @@ return [
 
 ## Usage
 
-Add an event which implements ShouldBroadcast interface like in https://laravel.com/docs/master/broadcasting#defining-broadcast-events
+Add an event which implements ShouldBroadcast interface like in <https://laravel.com/docs/master/broadcasting#defining-broadcast-events>
 
 ```php
 <?php
@@ -82,11 +86,10 @@ es.addEventListener('message', (messageEvent) => {
 });
 ```
 
-
 Private channels go a bit differently than with broadcasting through sockets. Private channels are baked in Mercure and
 are secured with a jwt token.
 
-First create a http middleware, so we can generate the Mercure authentication cookie with the token. 
+First create a http middleware, so we can generate the Mercure authentication cookie with the token.
 Don't forget to add the middleware to your route!
 
 Example:
@@ -194,9 +197,9 @@ es.addEventListener('message', (messageEvent) => {
 
 ### Advanced usage
 
-If you want to generate your own JWT, you can do it by overriding the `mvanduijker.mercure_broadcaster.publisher_jwt` service. 
+If you want to generate your own JWT, you can do it by overriding the `mvanduijker.mercure_broadcaster.publisher_jwt` service.
 You want to do this if you want to have custom claims, using other signing algorithms, etc. It expects a string back containing the JWT.
-Example how the default JWT is generated: https://github.com/mvanduijker/laravel-mercure-broadcaster/blob/master/src/LaravelMercureBroadcasterServiceProvider.php#L32
+Example how the default JWT is generated: <https://github.com/mvanduijker/laravel-mercure-broadcaster/blob/master/src/LaravelMercureBroadcasterServiceProvider.php#L32>
 
 Make sure you also make the changes in the cookie middleware.
 
@@ -206,8 +209,6 @@ Make sure you read the documentation of Mercure and how to run it securely (behi
 
 * [Mercure documentation](https://github.com/dunglas/mercure)
 * [Symfony integration document](https://symfony.com/doc/current/mercure.html)
-
-
 
 ### Testing
 
@@ -223,12 +224,11 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-
 ## Credits
 
-- [Mark van Duijker](https://github.com/mvanduijker)
-- [Kévin Dunglas](https://github.com/dunglas)
-- [All Contributors](../../contributors)
+* [Mark van Duijker](https://github.com/mvanduijker)
+* [Kévin Dunglas](https://github.com/dunglas)
+* [All Contributors](../../contributors)
 
 ## License
 
